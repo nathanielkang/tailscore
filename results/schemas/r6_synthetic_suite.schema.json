@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tailscore/r6_synthetic_suite.schema.json",
+  "title": "TailScore R6 synthetic suite result",
+  "description": "Output of scripts/run_r6_synthetic_suite.py — 24-dataset mixed-type grid",
+  "type": "object",
+  "required": [
+    "schema",
+    "n_samples_per_ds",
+    "T",
+    "score_partition_ratio",
+    "seeds",
+    "methods",
+    "n_runs",
+    "datasets",
+    "aggregate"
+  ],
+  "properties": {
+    "schema": { "type": "string", "enum": ["r6_synthetic_suite/v1"] },
+    "created_at": { "type": "string" },
+    "config": { "type": "string" },
+    "n_samples_per_ds": { "type": "integer", "minimum": 1 },
+    "T": { "type": "integer", "minimum": 1 },
+    "epochs": { "type": "integer", "minimum": 1 },
+    "score_partition_ratio": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+    "seeds": { "type": "array", "items": { "type": "integer" } },
+    "methods": { "type": "array", "items": { "type": "string" } },
+    "n_runs": { "type": "integer" },
+    "elapsed_sec": { "type": "number" },
+    "datasets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "dependency", "tail_severity", "cat_complexity", "seed", "results"],
+        "properties": {
+          "name": { "type": "string" },
+          "dependency": { "type": "string", "enum": ["linear", "bilinear", "piecewise", "sparse_nonlinear"] },
+          "tail_severity": { "type": "string", "enum": ["rare_5", "rare_10", "rare_15"] },
+          "cat_complexity": { "type": "string", "enum": ["low", "high"] },
+          "seed": { "type": "integer" },
+          "results": {
+            "type": "object",
+            "properties": {
+              "tcse": { "$ref": "#/$defs/method_result" },
+              "tong_reg": { "$ref": "#/$defs/method_result" },
+              "erm": { "$ref": "#/$defs/method_result" },
+              "fds": { "$ref": "#/$defs/method_result" }
+            }
+          },
+          "meta": { "type": "object" },
+          "error": { "type": "string" }
+        }
+      }
+    },
+    "aggregate": {
+      "type": "object",
+      "required": ["n_runs", "win_rate", "bootstrap_ci", "clause_1_pass", "clause_2_pass"],
+      "properties": {
+        "n_runs": { "type": "integer" },
+        "win_rate": { "type": "number" },
+        "bootstrap_ci": { "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2 },
+        "mean_norm_gain": { "type": "number" },
+        "clause_1_pass": { "type": ["boolean", "string"] },
+        "effect_size_by_severity": { "type": "object" },
+        "clause_2_pass": { "type": ["boolean", "string"] },
+        "clause_3_pass": { "type": ["boolean", "string"] },
+        "clause_4_pass": { "type": ["boolean", "string"] },
+        "overall_pass": { "type": ["boolean", "string"] },
+        "note": { "type": "string" }
+      }
+    }
+  },
+  "$defs": {
+    "method_result": {
+      "type": "object",
+      "properties": {
+        "tail_mae": { "type": "number" },
+        "mae": { "type": "number" },
+        "spearman": { "type": "number" },
+        "stage": { "type": "string" }
+      }
+    }
+  },
+  "additionalProperties": true
+}

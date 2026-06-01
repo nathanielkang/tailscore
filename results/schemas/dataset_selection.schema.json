@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tailscore/dataset_selection.schema.json",
+  "title": "TailScore dataset selection (12 run → 9 main)",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "n_candidates",
+    "n_selected",
+    "selection_metric",
+    "all_datasets",
+    "scores",
+    "selected_main",
+    "excluded"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "n_candidates": { "type": "integer", "const": 12 },
+    "n_selected": { "type": "integer", "const": 9 },
+    "selection_metric": { "type": "string" },
+    "higher_is_better": { "type": "boolean" },
+    "all_datasets": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "items": { "type": "string" }
+    },
+    "scores": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["dataset", "pilot_score", "tail_mae_tcse", "tail_mae_fds", "spearman_tcse", "n_tail_test", "eligible"],
+        "properties": {
+          "dataset": { "type": "string" },
+          "pilot_score": { "type": "number" },
+          "tail_mae_tcse": { "type": "number" },
+          "tail_mae_fds": { "type": "number" },
+          "spearman_tcse": { "type": "number" },
+          "n_tail_test": { "type": "integer" },
+          "eligible": { "type": "boolean" },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "selected_main": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "items": { "type": "string" }
+    },
+    "excluded": { "type": "array", "items": { "type": "string" } },
+    "kin8nm_diagnostic_only": { "type": "boolean" }
+  },
+  "additionalProperties": true
+}

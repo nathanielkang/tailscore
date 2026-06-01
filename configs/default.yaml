@@ -1,0 +1,54 @@
+# TailScore (TCSE) — default experiment config
+# §37 parity: corruption keys match PROPOSAL A0
+
+corruption:
+  train: mdm
+  eval: clean_cat
+
+tcse:
+  T: 50
+  k_neighbors: 32
+  lambda_weight: 1.0
+  clip_upper: 5.0
+  score_epochs: 50
+  reg_epochs: 50
+
+training:
+  epochs: 50
+  batch_size: 256
+  lr: 1.0e-3
+  hidden_dim: 64
+  seed: 42
+
+experiment:
+  datasets_all:
+    - meps_19
+    - acs_income
+    - brazilian_housing
+    - diamond
+    - house_16h
+    - cpu_small
+    - naval
+    - kin8nm
+    - abalone
+    - space_ga
+    - yacht
+    - california_housing
+  datasets_main: []  # filled by results/dataset_selection.json
+  n_select_main: 9
+  pilots:
+    - cpu_small
+    - diamond
+    - house_16h
+  seeds: [42, 43, 44]
+  test_size: 0.2
+  tail_quantile: 0.15
+  methods:
+    - erm
+    - uniform_erm
+    - fds
+    - denseloss
+    - tong_reg
+    - prime_t
+    - tabddpm_aug
+    - tcse

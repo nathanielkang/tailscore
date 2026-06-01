@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tailscore/pilot_smoke.schema.json",
+  "title": "TailScore pilot smoke result",
+  "description": "PROPOSAL Implementation appendix — pilot_smoke.json fields",
+  "type": "object",
+  "required": [
+    "status",
+    "dataset",
+    "T",
+    "spearman",
+    "tail_mae",
+    "fds_tail_mae",
+    "tong_spearman_T1",
+    "tong_spearman_T50",
+    "plateau_delta"
+  ],
+  "properties": {
+    "status": { "type": "string", "enum": ["scaffold", "smoke", "pilot", "pass", "fail"] },
+    "dataset": { "type": ["string", "null"] },
+    "T": { "type": "integer", "minimum": 1 },
+    "spearman": { "type": "number" },
+    "tail_mae": { "type": "number" },
+    "fds_tail_mae": { "type": "number" },
+    "tong_spearman_T1": { "type": "number" },
+    "tong_spearman_T50": { "type": "number" },
+    "plateau_delta": { "type": "number" },
+    "loss_epoch1": { "type": "number" },
+    "loss_epoch2": { "type": "number" },
+    "methods": { "type": "object" },
+    "corruption": {
+      "type": "object",
+      "properties": {
+        "train": { "type": "string" },
+        "eval": { "type": "string" }
+      }
+    },
+    "note": { "type": "string" }
+  },
+  "additionalProperties": true
+}

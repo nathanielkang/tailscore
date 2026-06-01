@@ -1,0 +1,33 @@
+# 2-epoch local smoke — workflow §1
+
+corruption:
+  train: mdm
+  eval: clean_cat
+
+tcse:
+  T: 5
+  k_neighbors: 8
+  lambda_weight: 1.0
+  clip_upper: 5.0
+  # Single-stage for smoke (ratio=1.0); set 0.5 for R6 two-stage
+  score_partition_ratio: 1.0
+  global_rank_weight: 0.6
+
+training:
+  epochs: 2
+  batch_size: 64
+  lr: 1.0e-3
+  hidden_dim: 32
+  seed: 42
+
+experiment:
+  datasets_all: [synthetic_smoke]
+  n_select_main: 1
+  pilots: [synthetic_smoke]
+  seeds: [42]
+  tail_quantile: 0.15
+  methods:
+    - erm
+    - fds
+    - tong_reg
+    - tcse

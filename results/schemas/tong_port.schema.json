@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tailscore/tong_port.schema.json",
+  "title": "TailScore Tong frozen comparator port result",
+  "description": "Output of scripts/run_tong_port.py — frozen Tong-eval-asymmetry-port",
+  "type": "object",
+  "required": [
+    "schema",
+    "n_samples_per_ds",
+    "epochs",
+    "k_neighbors",
+    "seeds",
+    "n_runs",
+    "datasets"
+  ],
+  "properties": {
+    "schema": { "type": "string", "enum": ["tong_port/v1"] },
+    "created_at": { "type": "string" },
+    "config": { "type": "string" },
+    "n_samples_per_ds": { "type": "integer" },
+    "epochs": { "type": "integer" },
+    "k_neighbors": { "type": "integer" },
+    "seeds": { "type": "array", "items": { "type": "integer" } },
+    "n_runs": { "type": "integer" },
+    "elapsed_sec": { "type": "number" },
+    "cross_check_warnings": { "type": "array", "items": { "type": "string" } },
+    "note": { "type": "string" },
+    "datasets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "dependency", "tail_severity", "cat_complexity", "seed"],
+        "properties": {
+          "name": { "type": "string" },
+          "dependency": { "type": "string" },
+          "tail_severity": { "type": "string" },
+          "cat_complexity": { "type": "string" },
+          "seed": { "type": "integer" },
+          "n_train": { "type": "integer" },
+          "tong_tail_mae": { "type": "number" },
+          "tong_mae": { "type": "number" },
+          "tong_spearman": { "type": ["number", "null"] },
+          "proxy_spearman": { "type": "number" },
+          "proxy_weight_pctls": { "type": "object" },
+          "error": { "type": "string" }
+        }
+      }
+    }
+  },
+  "additionalProperties": true
+}

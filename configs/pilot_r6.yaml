@@ -1,0 +1,53 @@
+# Round 6 linked pilot gate (T=50, three frozen datasets) — stub runner
+
+corruption:
+  train: mdm
+  eval: clean_cat
+
+tcse:
+  T: 50
+  k_neighbors: 24
+  lambda_weight: 2.5
+  clip_upper: 12.0
+  score_partition_ratio: 0.5
+  global_rank_weight: 0.88
+  tail_emphasis: 1.35
+
+training:
+  epochs: 30
+  batch_size: 256
+  lr: 1.0e-3
+  hidden_dim: 64
+  seed: 42
+
+experiment:
+  datasets_all:
+    - cpu_small
+    - diamond
+    - house_16h
+    - meps_19
+    - acs_income
+    - naval
+    - brazilian_housing
+  n_select_main: 7
+  pilots:
+    - cpu_small
+    - diamond
+    - house_16h
+    - meps_19
+    - acs_income
+    - naval
+    - brazilian_housing
+  seeds: [42, 43, 44]
+  tail_quantile: 0.15
+  methods:
+    - fds
+    - tong_reg
+    - tcse
+
+pilot_gate:
+  spearman_min: 0.3
+  n_tail_min: 50
+  beat_tong_at_T: [1, 50]
+  plateau_T_pair: [50, 100]
+  plateau_delta_max: 0.05

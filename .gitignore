@@ -1,0 +1,42 @@
+# Experiment outputs (generated locally; not part of the public code release)
+results/*
+!results/schemas/
+!results/schemas/**
+
+# Cached or downloaded data (top-level cache only — not Python packages named data/)
+/data/
+*.csv
+*.json
+!results/schemas/*.json
+
+# Logs and scratch
+*.log
+texput.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Secrets
+.env
+*.pem
+*-key.json
+*.pkl
+*.pickle
+
+# Manuscript figure pipeline (requires local result JSON; not needed for core reproduction)
+scripts/generate_figures.py
