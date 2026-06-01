@@ -39,8 +39,6 @@ python scripts/run_pilot.py --config configs/pilot_r6.yaml
 python scripts/run_flagship_9.py
 ```
 
-Schema definitions for machine-readable outputs live in `results/schemas/`.
-
 ## Package layout
 
 | Path | Role |

@@ -1,13 +1,10 @@
-# Experiment outputs (generated locally; not part of the public code release)
-results/*
-!results/schemas/
-!results/schemas/**
+# Experiment outputs (generated locally)
+results/
 
 # Cached or downloaded data (top-level cache only — not Python packages named data/)
 /data/
 *.csv
 *.json
-!results/schemas/*.json
 
 # Logs and scratch
 *.log
