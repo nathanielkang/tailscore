@@ -2,7 +2,7 @@
 
 **Tail Conditional Score Energy (TCSE)** is a feature-aware importance reweighting method for imbalanced tabular regression. A mixed-type denoising score model supplies a per-row tail energy; energies are calibrated within feature neighbourhoods and mapped to clipped sample weights while the regressor trains on real rows only (no synthetic augmentation).
 
-This repository is the **code supplement** for the accompanying journal submission. It ships **implementation code only**: no manuscript files, no precomputed result tables, no cached datasets, and no figure-export scripts.
+This repository is the **reference implementation** accompanying the TailScore manuscript. It contains **source code only**. Datasets are loaded at runtime via OpenML and scikit-learn; running the scripts writes JSON summaries under `results/` on your machine (not tracked in git).
 
 **Repository:** https://github.com/nathanielkang/tailscore
 
@@ -56,8 +56,6 @@ Schema definitions for machine-readable outputs live in `results/schemas/`.
 ## Scope
 
 **Included:** TCSE and in-repo baselines on a shared tabular MLP backbone, evaluation metrics, and configuration files needed to rerun the experiments described in the paper.
-
-**Excluded from this repository:** manuscript sources, cached CSV dumps, logged result JSON from our runs, and internal figure-generation scripts.
 
 ## Citation
 
